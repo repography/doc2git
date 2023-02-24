@@ -1,0 +1,45 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 6rem 2rem;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.title {
+	font-size: 4rem;
+}
+
+.title a {
+	color: #000;
+	text-decoration: none;
+}
+
+@media (min-width: 600px) {
+	.title {
+		font-size: 8rem;
+	}
+}
+
+.subtitle {
+	font-size: 1rem;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	margin-bottom: 20px;
+}
+
+.subtitle img {
+	margin-left: 10px;
+}
+
+.footer {
+	text-align: center;
+}
+
+.nav a {
+	color: #000;
+	margin: 10px;
+}

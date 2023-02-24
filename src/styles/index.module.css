@@ -1,0 +1,22 @@
+.intro {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.steps {
+	margin-top: 40px;
+	padding: 40px;
+	width: 100%;
+}
+
+.stepContent {
+	padding: 20px;
+}
+
+.code {
+	background: #eee;
+	font-weight: bold;
+	font-family: monospace;
+	font-size: 1rem;
+	padding: 5px;
+}
