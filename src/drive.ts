@@ -22,9 +22,8 @@ export async function getAllRevisions(
 		}
 		if (page.result.nextPageToken === undefined) {
 			break;
-		} else {
-			pageToken = page.result.nextPageToken;
 		}
+		pageToken = page.result.nextPageToken;
 	}
 	return revisions;
 }
