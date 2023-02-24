@@ -39,4 +39,4 @@ make dev           # Run the dev server
 ```
 
 ## [![Repography logo](https://images.repography.com/logo.svg)](https://repography.com) / Structure
-[![Structure](https://images.repography.com/19895906/repography/doc2git/structure/xBNF0JYFSocuw7mZEnaxR6xS8uB9O4rph_eKzBjJmeA/RFVf-POUoL_xflQt-fBmjxFiuOwINvA1D7IWlN-NGHE_table.svg)](https://github.com/repography/doc2git)
+[![Structure](https://images.repography.com/19895906/repography/doc2git/structure/Xdp0kVq_dZMDYRYZOp6oCphfIk5Gj3O5ZKq5vLDnLgY/DiY3rh20x1BSz1Byso7ReFaaMLYfrogsVrgmm2R2wQM_table.svg)](https://github.com/repography/doc2git)

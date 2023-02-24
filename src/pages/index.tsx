@@ -125,7 +125,7 @@ export default function Index() {
 				<Link href="https://github.com/repography/doc2git" target="_blank">
 					doc2git on GitHub
 				</Link>
-				, including instructions on how you can host doc2git yourself.
+				, including instructions on how to host doc2git yourself.
 			</Typography>
 			<Paper elevation={3} className={styles.steps}>
 				<Stepper orientation="vertical" activeStep={stepIndex}>

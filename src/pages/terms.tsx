@@ -24,7 +24,7 @@ export default function Terms() {
 			</Typography>
 			<Typography>
 				By using doc2git, you warrant that you have the right to process and
-				duplicate any Google Docs which which you process.
+				duplicate any Google Docs which you process.
 			</Typography>
 			<Typography>
 				We do not authorise the use of automated security testing against

@@ -21,7 +21,7 @@ export default function Privacy() {
 			</Typography>
 			<Typography>
 				When you enter a Google Doc URL, doc2git requests read-only access to
-				Google Drive.
+				your Google Drive.
 				<ul>
 					<li>
 						This access isn&apos;t persisted. I.e. The access token isn&apos;t
@@ -31,8 +31,8 @@ export default function Privacy() {
 						doc2git uses this only to access the Google Doc you requested.
 					</li>
 					<li>
-						doc2git uses the Google Drive API to fetches the list of revisions
-						to this Doc, and creates a plain text export of each revision. This
+						doc2git uses the Google Drive API to fetch the list of revisions to
+						this Doc, and creates a plain text export of each revision. This
 						export is committed to the Git repo (in your browser) with the
 						corresponding author (name and email address) and time of revision.
 					</li>
