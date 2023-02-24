@@ -3,3 +3,11 @@ body {
 	padding: 0;
 	margin: 0;
 }
+html, body {
+	height: 100%;
+}
+#__next {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}

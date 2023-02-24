@@ -3,9 +3,10 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	padding: 6rem 2rem;
+	padding: 2rem;
 	max-width: 800px;
 	margin: 0 auto;
+	flex: 1;
 }
 
 .title {
