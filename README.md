@@ -1,9 +1,6 @@
 <p align="center">
 <a href="https://doc2git.repography.com"><img alt="doc2git" src="./public/doc2git.png"></a>
 </p>
-<p align="center">
-by <a href="https://repography.com"><img alt="Repography" src="./public/logo-wordmark.png"></a>
-</p>
 
 ## Create a Git repo from your Google Doc revision history
 
