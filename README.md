@@ -11,7 +11,7 @@ The simplest way to use doc2git is on [doc2git.repography.com](https://doc2git.r
 
 ## Running doc2git yourself
 
-If you want to run doc2git with your own Google OAuth credentials then you can clone this repo and deploy it elsewhere.
+If you want to run doc2git with your own Google OAuth credentials then you can clone this repo and run it locally or deploy it elsewhere.
 
 There's only one setting to change, which is the Google OAuth client ID. This is configured in the [Makefile](./Makefile).
 
