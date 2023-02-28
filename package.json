@@ -1,8 +1,8 @@
 {
   "name": "doc2git",
   "version": "0.1.0",
-  "license": "UNLICENSED",
-  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "private": false,
   "engines": {
     "node": "^16.19.1",
     "npm": "^8.x"
