@@ -2,9 +2,9 @@ import '@/styles/globals.css';
 
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { Fredoka_One } from '@next/font/google';
 import clsx from 'clsx';
 import type { AppProps } from 'next/app';
+import { Fredoka_One } from 'next/font/google';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
