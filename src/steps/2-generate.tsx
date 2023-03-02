@@ -10,7 +10,7 @@ let zipFiles = (_fs: IFs): Promise<Blob> => Promise.resolve(new Blob([]));
 if (process.browser) {
 	// https://github.com/gildas-lormeau/zip.js/issues/376
 	// eslint-disable-next-line @typescript-eslint/no-var-requires
-	const { zipFiles: z } = require('@/files');
+	const { zipFiles: z } = require('@/lib/files');
 	zipFiles = z;
 }
 
