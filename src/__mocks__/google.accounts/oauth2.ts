@@ -49,23 +49,3 @@ export class AccountsOAuth2 {
 	}
 	revoke(accessToken: string, done: () => void): void {}
 }
-
-export const ACCOUNTS_OAUTH2_SCRIPT = `
-if (typeof(globalThis.google) === 'undefined') {
-	globalThis.google = {};
-}
-if (typeof(globalThis.google.accounts) === 'undefined') {
-	globalThis.google.accounts = {};
-}
-let callback;
-globalThis.google.accounts.oauth2 = {
-	initTokenClient: (config) => {
-		callback = config.callback;
-		return {
-			requestAccessToken: (overrideConfig) => {
-				callback(${ACCOUNTS_TOKEN_RESPONSE});
-			},
-		};
-	},
-};
-`;

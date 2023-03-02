@@ -48,26 +48,3 @@ export class AccountsId {
 		callback?: (response: google.accounts.id.RevocationResponse) => void,
 	): void {}
 }
-
-export const ACCOUNTS_ID_SCRIPT = `
-if (typeof(globalThis.google) === 'undefined') {
-	globalThis.google = {};
-}
-if (typeof(globalThis.google.accounts) === 'undefined') {
-	globalThis.google.accounts = {};
-}
-let callback;
-globalThis.google.accounts.id = {
-	initialize: (idConfig) => {
-		callback = idConfig.callback;
-	},
-	renderButton: (parent, options) => {
-		const buttton = document.createElement('button');
-		button.textContent = 'Sign in with Google';
-		button.addEventListener('click', () => callback(${JSON.stringify(
-			ACCOUNTS_AUTH_RESPONSE,
-		)}));
-		parent.appendChild(button);
-	},
-};
-`;
