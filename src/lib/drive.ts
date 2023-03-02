@@ -6,7 +6,7 @@ const listRevisionsPageSize = 100;
 
 export async function getAllRevisions(
 	fileId: string,
-): Promise<gapi.client.drive.Revision[]> {
+): Promise<Array<gapi.client.drive.Revision>> {
 	const revisions = [];
 	let pageToken;
 	while (true) {

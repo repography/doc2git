@@ -1,9 +1,7 @@
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
-import { createRef, FunctionComponent, MutableRefObject } from 'react';
 
-import Step, { Download, Progress } from '@/components/step';
-
+import Step, { Download, Progress } from '@/components/Step';
 import styles from '@/styles/step.module.css';
 
 export interface Step3DownloadProps {
@@ -14,13 +12,13 @@ export interface Step3DownloadProps {
 	back: () => void;
 }
 
-const Step3Download: FunctionComponent<Step3DownloadProps> = ({
+const Step3Download = ({
 	download,
 	progress,
 	error,
 	setError,
 	back,
-}) => (
+}: Step3DownloadProps): JSX.Element => (
 	<Step
 		download={download}
 		actionLabel="Download"

@@ -1,23 +1,23 @@
-import clsx from 'clsx';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import '@/styles/globals.css';
+
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import type { AppProps } from 'next/app';
 import { Fredoka_One } from '@next/font/google';
+import clsx from 'clsx';
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 import { useState } from 'react';
 
-import theme from '../theme';
 import { GoogleContext } from '@/contexts/google';
-
-import '@/styles/globals.css';
+import theme from '@/lib/theme';
 import styles from '@/styles/app.module.css';
 
 const titleFont = Fredoka_One({ weight: '400', subsets: ['latin'] });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
 	const hasGoogle =
 		typeof window !== 'undefined' && typeof window.google !== 'undefined';
 	const [scriptGsiLoaded, setScriptGsiLoaded] = useState(hasGoogle);
@@ -76,12 +76,12 @@ export default function App({ Component, pageProps }: AppProps) {
 			<Script
 				src="https://accounts.google.com/gsi/client"
 				strategy="afterInteractive"
-				onLoad={() => setScriptGsiLoaded(true)}
+				onLoad={(): void => setScriptGsiLoaded(true)}
 			/>
 			<Script
 				src="https://apis.google.com/js/api.js"
 				strategy="afterInteractive"
-				onLoad={() => setScriptGapiLoaded(true)}
+				onLoad={(): void => setScriptGapiLoaded(true)}
 			/>
 		</>
 	);

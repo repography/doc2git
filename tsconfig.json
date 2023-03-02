@@ -14,9 +14,9 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,
-		"baseUrl": ".",
+		"baseUrl": "src",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./*"]
 		},
 		"types": ["gapi", "gapi.client", "gapi.client.drive", "google.accounts"]
 	},

@@ -1,3 +1,68 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "extends": [
+    "plugin:unicorn/recommended",
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "plugins": ["simple-import-sort", "unicorn"],
+  "ignorePatterns": [
+  ],
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*.test.[jt]s?(x)"],
+      "extends": ["plugin:jest/recommended", "plugin:testing-library/react"],
+      "rules": {
+        "jest/consistent-test-it": "error"
+      }
+    },
+    {
+      "files": ["*.[t]s?(x)"],
+      "extends": ["plugin:@typescript-eslint/recommended"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          { "allowedNames": ["getStaticProps", "getStaticPaths"] }
+        ],
+        "@typescript-eslint/array-type": ["error", { "default": "generic" }],
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "ignoreRestSiblings": true
+          }
+        ],
+        "@typescript-eslint/prefer-optional-chain": "warn"
+      }
+    },
+    {
+      "files": ["**/__mocks__/**/*.[jt]s?(x)"],
+      "rules": {
+        "unicorn/no-null": "off",
+        "unicorn/no-array-callback-reference": "off"
+      }
+    }
+  ],
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "no-console": "warn",
+    "unicorn/no-array-for-each": "warn",
+    "unicorn/prefer-switch": "error",
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/filename-case": "off",
+    "unicorn/prefer-module": "off",
+    "unicorn/numeric-separators-style": "off",
+    "unicorn/prefer-top-level-await": "off",
+    "unicorn/no-null": "warn",
+    "default-case-last": "error",
+    "default-case": "error"
+  }
 }

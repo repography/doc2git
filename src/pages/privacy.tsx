@@ -1,9 +1,8 @@
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
 
 import styles from '@/styles/terms.module.css';
 
-export default function Privacy() {
+export default function Privacy(): JSX.Element {
 	return (
 		<div className={styles.terms}>
 			<Typography>

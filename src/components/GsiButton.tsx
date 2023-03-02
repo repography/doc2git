@@ -1,29 +1,16 @@
-import jwtDecode, { JwtPayload } from 'jwt-decode';
-import {
-	createRef,
-	FunctionComponent,
-	useContext,
-	useEffect,
-	useState,
-} from 'react';
+import jwtDecode from 'jwt-decode';
+import { createRef, useContext, useEffect } from 'react';
 
-import { GoogleContext, GoogleContextType } from '@/contexts/google';
+import { type GoogleContextType, GoogleContext } from '@/contexts/google';
+import { type AuthInfo, type GoogleCredentialResponse } from '@/lib/gsi';
 
-export interface AuthInfo {
-	email: string;
-	name: string;
-	picture: string;
-}
-
-interface GoogleCredentialResponse {
-	credential: string;
-}
+type OnAuthInfo = (info: AuthInfo) => void;
 
 interface GsiButtonParams {
-	onAuthInfo: (info: AuthInfo) => void;
+	onAuthInfo: OnAuthInfo;
 }
 
-const GsiButton: FunctionComponent<GsiButtonParams> = ({ onAuthInfo }) => {
+const GsiButton = ({ onAuthInfo }: GsiButtonParams): JSX.Element => {
 	const { gsiLoaded } = useContext(GoogleContext) as GoogleContextType;
 	const buttonRef = createRef<HTMLDivElement>();
 

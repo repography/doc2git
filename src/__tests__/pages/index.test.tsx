@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import Index from '../../pages/index';
 import '@testing-library/jest-dom';
+
+import { render, screen } from '@testing-library/react';
+
+import Index from '../../pages/index';
 
 describe('Index', () => {
 	it('links to github', () => {

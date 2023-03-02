@@ -1,24 +1,21 @@
-import clsx from 'clsx';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import Step from '@mui/material/Step';
+import StepContent from '@mui/material/StepContent';
+import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
+import clsx from 'clsx';
 import Link from 'next/link';
-import { FunctionComponent, useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { AuthInfo } from '@/components/gsi-button';
-import { GoogleContext } from '@/contexts/google';
-import { Download, Progress } from '@/components/step';
-import Step1SignIn, { Step1SignInProps } from '@/steps/1-sign-in';
-import Step2Generate, { Step2GenerateProps } from '@/steps/2-generate';
-import Step3Download, { Step3DownloadProps } from '@/steps/3-download';
-
+import { Download, Progress } from '@/components/Step';
+import { AuthInfo } from '@/lib/gsi';
+import Step1SignIn from '@/steps/1-sign-in';
+import Step2Generate from '@/steps/2-generate';
+import Step3Download from '@/steps/3-download';
 import styles from '@/styles/index.module.css';
 
-export default function Index() {
+export default function Index(): JSX.Element {
 	const [authInfo, setAuthInfo] = useState<AuthInfo>();
 	const [googleReady, setGoogleReady] = useState(Promise.resolve(false));
 	const [docUrl, setDocUrl] = useState('');
@@ -36,12 +33,12 @@ export default function Index() {
 	const [download, setDownload] = useState<Download>();
 
 	const [stepIndex, setStepIndex] = useState(0);
-	const back = () => {
+	const back = (): void => {
 		setStepIndex(stepIndex - 1);
 		setError('');
-		setDownload(undefined);
+		setDownload();
 	};
-	const next = async () => {
+	const next = async (): void => {
 		setStepIndex(stepIndex + 1);
 	};
 

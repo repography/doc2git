@@ -1,8 +1,7 @@
-import clsx from 'clsx';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
-import { FunctionComponent, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import styles from '@/styles/step.module.css';
 
@@ -32,7 +31,7 @@ export interface StepProps {
 	back?: () => void;
 }
 
-const Step: FunctionComponent<StepProps> = ({
+const Step = ({
 	children,
 	action,
 	actionLabel,
@@ -42,12 +41,12 @@ const Step: FunctionComponent<StepProps> = ({
 	error,
 	setError,
 	back,
-}) => {
+}: StepProps): JSX.Element => {
 	const actionProps: ActionProps = {};
 	if (action !== undefined) {
-		actionProps.onClick = async () => {
+		actionProps.onClick = async (): Promise<void> => {
 			setError('');
-			await action!!();
+			await action();
 		};
 	} else if (download !== undefined) {
 		actionProps.download = download.download;

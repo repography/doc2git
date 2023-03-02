@@ -1,5 +1,5 @@
-import { IFs } from 'memfs';
 import { BlobReader, BlobWriter, ZipWriter } from '@zip.js/zip.js';
+import { IFs } from 'memfs';
 
 interface Dirent {
 	name: string;
@@ -9,7 +9,7 @@ interface Dirent {
 async function* getFiles(fs: IFs, dir: string): any {
 	const entries = (await fs.promises.readdir(dir, {
 		withFileTypes: true,
-	})) as Dirent[];
+	})) as Array<Dirent>;
 	for (const entry of entries) {
 		const path = `${dir}/${entry.name}`;
 		if (entry.isDirectory()) {

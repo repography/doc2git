@@ -1,19 +1,15 @@
+import TextField from '@mui/material/TextField';
 import { add, commit, init } from 'isomorphic-git';
 import { createFsFromVolume, IFs, Volume } from 'memfs';
-import TextField from '@mui/material/TextField';
-import {
-	createRef,
-	FunctionComponent,
-	MutableRefObject,
-	useState,
-} from 'react';
+import { MutableRefObject, useState } from 'react';
 
-import { getAllRevisions } from '@/drive';
-import Step, { Download, Progress } from '@/components/step';
+import Step, { Download, Progress } from '@/components/Step';
+import { getAllRevisions } from '@/lib/drive';
 
-let zipFiles = (fs: IFs) => Promise.resolve(new Blob([]));
+let zipFiles = (_fs: IFs): Promise<Blob> => Promise.resolve(new Blob([]));
 if (process.browser) {
 	// https://github.com/gildas-lormeau/zip.js/issues/376
+	// eslint-disable-next-line @typescript-eslint/no-var-requires
 	const { zipFiles: z } = require('@/files');
 	zipFiles = z;
 }
@@ -44,7 +40,7 @@ export interface Step2GenerateProps {
 	back: () => void;
 }
 
-const Step2Generate: FunctionComponent<Step2GenerateProps> = ({
+const Step2Generate = ({
 	docUrl,
 	setDocUrl,
 	googleReady,
@@ -58,13 +54,13 @@ const Step2Generate: FunctionComponent<Step2GenerateProps> = ({
 	tokenClient,
 	next,
 	back,
-}) => {
+}: Step2GenerateProps): JSX.Element => {
 	const [docUrlError, setDocUrlError] = useState('');
 
-	const action = async () => {
+	const action = async (): Promise<void> => {
 		let docId: string;
 		const m = docUrlPattern.exec(docUrl);
-		if (m && m[1].length) {
+		if (m && m[1].length > 0) {
 			docId = m[1];
 		} else if (docIdPattern.test(docUrl)) {
 			docId = docUrl.trim();
@@ -81,13 +77,13 @@ const Step2Generate: FunctionComponent<Step2GenerateProps> = ({
 		}
 
 		const revisions = await getAllRevisions(docId)
-			.catch((err: any) => {
+			.catch((error_: any) => {
 				if (
-					err.result.error.code !== 401 &&
-					(err.result.error.code !== 403 ||
-						err.result.error.status !== 'PERMISSION_DENIED')
+					error_.result.error.code !== 401 &&
+					(error_.result.error.code !== 403 ||
+						error_.result.error.status !== 'PERMISSION_DENIED')
 				) {
-					throw new Error(err);
+					throw new Error(error_);
 				}
 				if (tokenClient === undefined) {
 					throw new Error('tokenClient is undefined');
@@ -95,7 +91,7 @@ const Step2Generate: FunctionComponent<Step2GenerateProps> = ({
 				return new Promise((resolve, reject) => {
 					tokenCallback.current = (
 						resp: google.accounts.oauth2.TokenResponse,
-					) => {
+					): Promise<void> => {
 						if (resp.error !== undefined) {
 							return reject(resp);
 						}
@@ -105,10 +101,9 @@ const Step2Generate: FunctionComponent<Step2GenerateProps> = ({
 					tokenClient.requestAccessToken();
 				});
 			})
-			.then((retry: any) => getAllRevisions(docId))
-			.catch((err: any) => {
-				console.error(err);
-				setError(`Google API error: ${err}`);
+			.then((_retry: any) => getAllRevisions(docId))
+			.catch((error_: any) => {
+				setError(`Google API error: ${error_}`);
 			});
 
 		if (!revisions) {
@@ -194,7 +189,7 @@ const Step2Generate: FunctionComponent<Step2GenerateProps> = ({
 			<TextField
 				label="URL or ID"
 				value={docUrl}
-				onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+				onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
 					setDocUrl(event.target.value);
 				}}
 				error={docUrlError !== ''}

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import styles from '@/styles/terms.module.css';
 
-export default function Terms() {
+export default function Terms(): JSX.Element {
 	return (
 		<div className={styles.terms}>
 			<Typography>

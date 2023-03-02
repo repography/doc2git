@@ -1,11 +1,12 @@
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
-import { FunctionComponent, MutableRefObject } from 'react';
+import { MutableRefObject } from 'react';
 
-import GsiButton, { AuthInfo } from '@/components/gsi-button';
-import { driveDiscoveryUrl, driveScope, getAllRevisions } from '@/drive';
-import Step from '@/components/step';
+import GsiButton from '@/components/GsiButton';
+import Step from '@/components/Step';
+import { driveDiscoveryUrl, driveScope } from '@/lib/drive';
+import { AuthInfo } from '@/lib/gsi';
 
 export interface Step1SignInProps {
 	authInfo: AuthInfo | undefined;
@@ -20,7 +21,7 @@ export interface Step1SignInProps {
 	next: () => Promise<void>;
 }
 
-const Step1SignIn: FunctionComponent<Step1SignInProps> = ({
+const Step1SignIn = ({
 	authInfo,
 	setAuthInfo,
 	setGoogleReady,
@@ -29,8 +30,8 @@ const Step1SignIn: FunctionComponent<Step1SignInProps> = ({
 	setTokenClient,
 	tokenCallback,
 	next,
-}) => {
-	const onAuthInfo = async (info: AuthInfo) => {
+}: Step1SignInProps): JSX.Element => {
+	const onAuthInfo = async (info: AuthInfo): Promise<void> => {
 		setAuthInfo(info);
 		setGoogleReady(
 			new Promise(async (gResolve, gReject) => {
@@ -41,9 +42,9 @@ const Step1SignIn: FunctionComponent<Step1SignInProps> = ({
 						hint: info.email,
 						client_id: process.env.NEXT_PUBLIC_CLIENT_ID as string,
 						scope: driveScope,
-						callback: (resp: google.accounts.oauth2.TokenResponse) => {
+						callback: (resp: google.accounts.oauth2.TokenResponse): void => {
 							if (tokenCallback.current === undefined) {
-								console.error('tokenCallback is undefined', resp);
+								gReject();
 								return;
 							}
 							tokenCallback.current(resp);
@@ -51,7 +52,7 @@ const Step1SignIn: FunctionComponent<Step1SignInProps> = ({
 					}),
 				);
 
-				await new Promise((resolve, reject) => {
+				await new Promise((resolve, reject): void => {
 					gapi.load('client', { callback: resolve, onerror: reject });
 				});
 
@@ -68,15 +69,15 @@ const Step1SignIn: FunctionComponent<Step1SignInProps> = ({
 		<Step
 			action={next}
 			actionLabel="Next"
-			actionShow={() => !!authInfo}
+			actionShow={(): boolean => !!authInfo}
 			error={error}
 			setError={setError}>
 			{authInfo ? (
 				<Chip
 					avatar={<Avatar alt={authInfo.name} src={authInfo.picture} />}
 					label={authInfo.name}
-					onDelete={() => {
-						setAuthInfo(undefined);
+					onDelete={(): void => {
+						setAuthInfo();
 						setGoogleReady(Promise.reject());
 					}}
 				/>
