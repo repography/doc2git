@@ -77,7 +77,7 @@ const Step1SignIn = ({
 					avatar={<Avatar alt={authInfo.name} src={authInfo.picture} />}
 					label={authInfo.name}
 					onDelete={(): void => {
-						setAuthInfo();
+						setAuthInfo(undefined);
 						setGoogleReady(Promise.reject());
 					}}
 				/>

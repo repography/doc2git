@@ -36,9 +36,9 @@ export default function Index(): JSX.Element {
 	const back = (): void => {
 		setStepIndex(stepIndex - 1);
 		setError('');
-		setDownload();
+		setDownload(undefined);
 	};
-	const next = async (): void => {
+	const next = async (): Promise<void> => {
 		setStepIndex(stepIndex + 1);
 	};
 

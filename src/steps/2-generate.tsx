@@ -91,7 +91,7 @@ const Step2Generate = ({
 				return new Promise((resolve, reject) => {
 					tokenCallback.current = (
 						resp: google.accounts.oauth2.TokenResponse,
-					): Promise<void> => {
+					): void => {
 						if (resp.error !== undefined) {
 							return reject(resp);
 						}

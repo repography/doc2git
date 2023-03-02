@@ -16,7 +16,8 @@
     "lint": "next lint",
     "prettier": "prettier -w 'src/**/*.{js,jsx,ts,tsx,css,md,json,yml,yaml,mdx}'",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
