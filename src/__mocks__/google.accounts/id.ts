@@ -8,7 +8,7 @@ const ACCOUNTS_AUTH_RESPONSE = {
 };
 
 // Example payload from https://developers.google.com/identity/gsi/web/reference/js-reference
-const ACCOUNTS_AUTH_INFO: AuthInfo = {
+export const ACCOUNTS_AUTH_INFO: AuthInfo = {
 	name: 'Elisa Beckett',
 	email: 'elisa.g.beckett@gmail.com',
 	picture: 'https://lh3.googleusercontent.com/a-/e2718281828459045235360uler',

@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import 'whatwg-fetch';
 
+import { GAPI } from '@/__mocks__/gapi';
 import { ACCOUNTS_ID, ACCOUNTS_OAUTH2 } from '@/__mocks__/google.accounts';
 import { server } from '@/mocks/server';
 
@@ -10,6 +11,8 @@ global.google = {
 		oauth2: ACCOUNTS_OAUTH2,
 	},
 };
+
+global.gapi = GAPI;
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());

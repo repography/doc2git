@@ -1,3 +1,4 @@
+import { ACCOUNTS_AUTH_INFO } from '@/__mocks__/google.accounts';
 import { render, screen } from '@/__tests__/__helpers__/testing-library-react';
 import GsiButton from '@/components/GsiButton';
 import { GoogleContext } from '@/contexts/google';
@@ -32,10 +33,8 @@ describe('<GsiButton />', () => {
 
 		expect(onAuthInfo.mock.calls).toHaveLength(1);
 		const [authInfo] = onAuthInfo.mock.calls[0];
-		expect(authInfo.name).toBe('Elisa Beckett');
-		expect(authInfo.email).toBe('elisa.g.beckett@gmail.com');
-		expect(authInfo.picture).toBe(
-			'https://lh3.googleusercontent.com/a-/e2718281828459045235360uler',
-		);
+		expect(authInfo.name).toBe(ACCOUNTS_AUTH_INFO.name);
+		expect(authInfo.email).toBe(ACCOUNTS_AUTH_INFO.email);
+		expect(authInfo.picture).toBe(ACCOUNTS_AUTH_INFO.picture);
 	});
 });

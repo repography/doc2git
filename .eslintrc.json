@@ -13,7 +13,8 @@
 	  "files": ["**/__tests__/**/*.test.[jt]s?(x)"],
 	  "extends": ["plugin:jest/recommended", "plugin:testing-library/react"],
 	  "rules": {
-		"jest/consistent-test-it": "error"
+		"jest/consistent-test-it": "error",
+		"jest/no-mocks-import": "off"
 	  }
 	},
 	{

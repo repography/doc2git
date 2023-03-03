@@ -22,6 +22,9 @@ const downloadMimeTypes: Record<string, string> = {
 const docIdPattern = /^\s*[\w-]+\s*$/;
 const docUrlPattern = /docs.google.com\/(?:u\/\d+\/)?document\/d\/([\w-]+)/i;
 
+export const DOC_INVALID_ERROR = `This doesn't appear to be a valid Google Doc URL or ID`;
+export const DOC_FETCH_ERROR = `Failed to list the revisions for this doc. Are you sure that it's a valid doc URL or ID, and that the account you've signed in with has access?`;
+
 export interface Step2GenerateProps {
 	docUrl: string;
 	setDocUrl: (docUrl: string) => void;
@@ -65,7 +68,7 @@ const Step2Generate = ({
 		} else if (docIdPattern.test(docUrl)) {
 			docId = docUrl.trim();
 		} else {
-			setDocUrlError(`This doesn't appear to be a valid Google Doc URL or ID`);
+			setDocUrlError(DOC_INVALID_ERROR);
 			return;
 		}
 
@@ -108,9 +111,7 @@ const Step2Generate = ({
 
 		if (!revisions) {
 			setActionLoading(false);
-			setError(
-				`Failed to list the revisions for this doc. Are you sure that it's a valid doc URL or ID, and that the account you've signed in with has access?`,
-			);
+			setError(DOC_FETCH_ERROR);
 			return;
 		}
 

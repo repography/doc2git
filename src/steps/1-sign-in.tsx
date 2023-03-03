@@ -6,7 +6,7 @@ import { MutableRefObject } from 'react';
 import GsiButton from '@/components/GsiButton';
 import Step from '@/components/Step';
 import { driveDiscoveryUrl, driveScope } from '@/lib/drive';
-import { AuthInfo } from '@/lib/gsi';
+import { type AuthInfo } from '@/lib/gsi';
 
 export interface Step1SignInProps {
 	authInfo: AuthInfo | undefined;
@@ -78,7 +78,7 @@ const Step1SignIn = ({
 					label={authInfo.name}
 					onDelete={(): void => {
 						setAuthInfo(undefined);
-						setGoogleReady(Promise.reject());
+						setGoogleReady(Promise.resolve(false));
 					}}
 				/>
 			) : (
