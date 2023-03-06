@@ -1,4 +1,4 @@
-import { BlobReader, BlobWriter, ZipWriter } from '@zip.js/zip.js';
+import JSZip from 'jszip';
 import { IFs } from 'memfs';
 
 interface Dirent {
@@ -20,28 +20,31 @@ async function* getFiles(fs: IFs, dir: string): any {
 	}
 }
 
-function zipFile(
-	fs: IFs,
-	zipWriter: ZipWriter<Blob>,
-	path: string,
-): Promise<any> {
-	return fs.promises.readFile(path).then((buf) => {
-		const blob = new Blob([buf]);
-		return zipWriter.add(path, new BlobReader(blob));
-	});
-}
-
 export async function zipFiles(fs: IFs): Promise<Blob> {
-	const blobWriter = new BlobWriter();
-	const zipWriter = new ZipWriter(blobWriter);
+	const zip = new JSZip();
 
 	const toZip = [];
 	for await (const path of getFiles(fs, '/')) {
-		toZip.push(zipFile(fs, zipWriter, path));
+		toZip.push(
+			fs.promises.readFile(path).then((buf) => {
+				zip.file(path, buf);
+			}),
+		);
 	}
 
 	await Promise.all(toZip);
-	await zipWriter.close();
+	return await zip.generateAsync({ type: 'blob' });
+}
 
-	return await blobWriter.getData();
+export async function unzipFiles(fs: IFs, zipBlob: Blob): Promise<void> {
+	const zip = await JSZip.loadAsync(zipBlob);
+	// eslint-disable-next-line unicorn/no-array-for-each
+	zip.forEach(async (path, file) => {
+		if (file.dir) {
+			fs.mkdirSync(path, { recursive: true });
+		} else {
+			const data = await file.async('nodebuffer');
+			fs.writeFileSync(path, data);
+		}
+	});
 }

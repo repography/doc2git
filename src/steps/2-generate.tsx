@@ -1,18 +1,11 @@
 import TextField from '@mui/material/TextField';
 import { add, commit, init } from 'isomorphic-git';
-import { createFsFromVolume, IFs, Volume } from 'memfs';
+import { createFsFromVolume, Volume } from 'memfs';
 import { MutableRefObject, useState } from 'react';
 
 import Step, { Download, Progress } from '@/components/Step';
 import { getAllRevisions } from '@/lib/drive';
-
-let zipFiles = (_fs: IFs): Promise<Blob> => Promise.resolve(new Blob([]));
-if (process.browser) {
-	// https://github.com/gildas-lormeau/zip.js/issues/376
-	// eslint-disable-next-line @typescript-eslint/no-var-requires
-	const { zipFiles: z } = require('@/lib/files');
-	zipFiles = z;
-}
+import { zipFiles } from '@/lib/files';
 
 const downloadMimeTypes: Record<string, string> = {
 	// 'text/html': 'html',
@@ -41,6 +34,7 @@ export interface Step2GenerateProps {
 	>;
 	next: () => Promise<void>;
 	back: () => void;
+	doneCallback?: () => void;
 }
 
 const Step2Generate = ({
@@ -57,6 +51,7 @@ const Step2Generate = ({
 	tokenClient,
 	next,
 	back,
+	doneCallback,
 }: Step2GenerateProps): JSX.Element => {
 	const [docUrlError, setDocUrlError] = useState('');
 
@@ -82,9 +77,11 @@ const Step2Generate = ({
 		const revisions = await getAllRevisions(docId)
 			.catch((error_: any) => {
 				if (
-					error_.result.error.code !== 401 &&
-					(error_.result.error.code !== 403 ||
-						error_.result.error.status !== 'PERMISSION_DENIED')
+					error_.result === undefined ||
+					error_.result.error === undefined ||
+					(error_.result.error.code !== 401 &&
+						(error_.result.error.code !== 403 ||
+							error_.result.error.status !== 'PERMISSION_DENIED'))
 				) {
 					throw new Error(error_);
 				}
@@ -105,8 +102,8 @@ const Step2Generate = ({
 				});
 			})
 			.then((_retry: any) => getAllRevisions(docId))
-			.catch((error_: any) => {
-				setError(`Google API error: ${error_}`);
+			.catch((_: any) => {
+				// Ignore actual error, will show user-friendly error below.
 			});
 
 		if (!revisions) {
@@ -142,7 +139,7 @@ const Step2Generate = ({
 					downloads.push(
 						fetch(url, fetchParams)
 							.then((resp) => resp.arrayBuffer())
-							.then((buf) => fs.writeFileSync(filepath, Buffer.from(buf)))
+							.then((buf) => fs.writeFileSync(`/${filepath}`, Buffer.from(buf)))
 							.then(() => add({ fs, dir: '/', filepath })),
 					);
 				}
@@ -177,6 +174,10 @@ const Step2Generate = ({
 			href: URL.createObjectURL(zipBlob),
 		});
 		setActionLoading(false);
+
+		if (doneCallback !== undefined) {
+			doneCallback();
+		}
 	};
 
 	return (
