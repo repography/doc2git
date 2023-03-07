@@ -21,30 +21,28 @@ export default function Privacy(): JSX.Element {
 			<Typography>
 				When you enter a Google Doc URL, doc2git requests read-only access to
 				your Google Drive.
-				<ul>
-					<li>
-						This access isn&apos;t persisted. I.e. The access token isn&apos;t
-						stored anywhere except your browser, or transmitted elsewhere.
-					</li>
-					<li>
-						doc2git uses this only to access the Google Doc you requested.
-					</li>
-					<li>
-						doc2git uses the Google Drive API to fetch the list of revisions to
-						this Doc, and creates a plain text export of each revision. This
-						export is committed to the Git repo (in your browser) with the
-						corresponding author (name and email address) and time of revision.
-					</li>
-					<li>
-						The Git repo is made available to you as a download, but isn&apos;t
-						stored anywhere or shared.
-					</li>
-					<li>
-						Once you close the browser tab running doc2git, all access and
-						Google user data is gone.
-					</li>
-				</ul>
 			</Typography>
+			<ul>
+				<li>
+					This access isn&apos;t persisted. I.e. The access token isn&apos;t
+					stored anywhere except your browser, or transmitted elsewhere.
+				</li>
+				<li>doc2git uses this only to access the Google Doc you requested.</li>
+				<li>
+					doc2git uses the Google Drive API to fetch the list of revisions to
+					this Doc, and creates a plain text export of each revision. This
+					export is committed to the Git repo (in your browser) with the
+					corresponding author (name and email address) and time of revision.
+				</li>
+				<li>
+					The Git repo is made available to you as a download, but isn&apos;t
+					stored anywhere or shared.
+				</li>
+				<li>
+					Once you close the browser tab running doc2git, all access and Google
+					user data is gone.
+				</li>
+			</ul>
 			<Typography variant="h5">Tracking / analytics</Typography>
 			<Typography>
 				In order to protect your privacy, doc2git does not use any web

@@ -27,7 +27,11 @@ const Step3Download = ({
 		setError={setError}
 		back={back}>
 		<Typography className={styles.status}>{progress.status}</Typography>
-		<LinearProgress variant="determinate" value={progress.percent} />
+		<LinearProgress
+			aria-label="progress"
+			variant="determinate"
+			value={progress.percent}
+		/>
 	</Step>
 );
 

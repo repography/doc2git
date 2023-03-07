@@ -1,8 +1,10 @@
 import { checkout, log } from 'isomorphic-git';
+import { axe } from 'jest-axe';
 import { createFsFromVolume, Volume } from 'memfs';
 
 import { mockRevisions } from '@/__mocks__/gapi/drive';
 import {
+	act,
 	fireEvent,
 	render,
 	screen,
@@ -34,7 +36,7 @@ describe('<Step2Generate />', () => {
 		const next = jest.fn();
 		const back = jest.fn();
 
-		const { user } = render(
+		const { container, user } = render(
 			<GoogleContext.Provider value={{ gsiLoaded: true, gapiLoaded: true }}>
 				<Step2Generate
 					docUrl={docUrl}
@@ -78,6 +80,11 @@ describe('<Step2Generate />', () => {
 		expect(docError.getAttribute('id')).toEqual(
 			input.getAttribute('aria-describedby'),
 		);
+
+		await act(async () => {
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
 	});
 	it("handles valid doc URL which doesn't exist", async () => {
 		const docUrl = 'https://docs.google.com/document/d/missing-doc-id';
@@ -98,7 +105,7 @@ describe('<Step2Generate />', () => {
 		const next = jest.fn();
 		const back = jest.fn();
 
-		const { user, rerender } = render(
+		const { container, rerender, user } = render(
 			<GoogleContext.Provider value={{ gsiLoaded: true, gapiLoaded: true }}>
 				<Step2Generate
 					docUrl={docUrl}
@@ -158,6 +165,11 @@ describe('<Step2Generate />', () => {
 		const alert = screen.getByRole('alert');
 		expect(alert).toBeInTheDocument();
 		expect(alert.textContent).toBe(DOC_FETCH_ERROR);
+
+		await act(async () => {
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
 	});
 	it('generates the zip for a valid doc ID', async () => {
 		const docId = 'several-revisions';
@@ -185,8 +197,9 @@ describe('<Step2Generate />', () => {
 			return 'data:foo';
 		};
 
-		const done = new Promise((resolve, _reject) =>
-			render(
+		let container: HTMLElement;
+		const done = new Promise((resolve, _reject) => {
+			const { container: c } = render(
 				<GoogleContext.Provider value={{ gsiLoaded: true, gapiLoaded: true }}>
 					<Step2Generate
 						docUrl={docUrl}
@@ -205,8 +218,9 @@ describe('<Step2Generate />', () => {
 						doneCallback={(): void => resolve(undefined)}
 					/>
 				</GoogleContext.Provider>,
-			),
-		);
+			);
+			container = c;
+		});
 
 		expect(screen.getAllByRole('textbox')).toHaveLength(1);
 		const input = screen.getByRole('textbox');
@@ -264,5 +278,10 @@ describe('<Step2Generate />', () => {
 			const content = await fs.promises.readFile('/doc.txt', 'utf8');
 			expect(content).toBe(rev.content);
 		}
+
+		await act(async () => {
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
 	});
 });

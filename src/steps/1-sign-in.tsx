@@ -74,7 +74,12 @@ const Step1SignIn = ({
 			setError={setError}>
 			{authInfo ? (
 				<Chip
-					avatar={<Avatar alt={authInfo.name} src={authInfo.picture} />}
+					avatar={
+						<Avatar
+							alt={`Picture of ${authInfo.name}`}
+							src={authInfo.picture}
+						/>
+					}
 					label={authInfo.name}
 					onDelete={(): void => {
 						setAuthInfo(undefined);

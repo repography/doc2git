@@ -1,6 +1,5 @@
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
 import { ReactNode } from 'react';
 
 import styles from '@/styles/step.module.css';
@@ -17,6 +16,8 @@ export interface Download {
 
 export interface ActionProps extends Download {
 	onClick?: () => Promise<void>;
+	['aria-busy']?: boolean;
+	['aria-describedby']?: string;
 }
 
 export interface StepProps {
@@ -53,6 +54,11 @@ const Step = ({
 		actionProps.href = download.href;
 	}
 
+	if (actionLoading) {
+		actionProps['aria-busy'] = true;
+		actionProps['aria-describedby'] = 'progress';
+	}
+
 	return (
 		<>
 			{children}
@@ -64,11 +70,7 @@ const Step = ({
 			<div className={styles.actions}>
 				{!actionShow || actionShow() ? (
 					<Button variant="contained" disabled={actionLoading} {...actionProps}>
-						{actionLoading ? (
-							<CircularProgress size="1rem" className={styles.progress} />
-						) : (
-							actionLabel
-						)}
+						{actionLabel}
 					</Button>
 				) : undefined}
 				{back !== undefined ? <Button onClick={back}>Back</Button> : undefined}

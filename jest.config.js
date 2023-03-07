@@ -23,6 +23,7 @@ const customJestConfig = {
   ],
   setupFilesAfterEnv: [
     "<rootDir>/src/__tests__/__helpers__/jest-setup.ts",
+    "<rootDir>/src/__tests__/__helpers__/axe/jest-axe-setup.ts",
   ],
   testMatch: ["**/__tests__/**/*.test.[jt]s?(x)"],
   coveragePathIgnorePatterns: [

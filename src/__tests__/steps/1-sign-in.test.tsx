@@ -1,5 +1,11 @@
+import { axe } from 'jest-axe';
+
 import { ACCOUNTS_AUTH_INFO } from '@/__mocks__/google.accounts';
-import { render, screen } from '@/__tests__/__helpers__/testing-library-react';
+import {
+	act,
+	render,
+	screen,
+} from '@/__tests__/__helpers__/testing-library-react';
 import { GoogleContext } from '@/contexts/google';
 import Step1SignIn from '@/steps/1-sign-in';
 
@@ -15,7 +21,7 @@ describe('<Step1SignIn />', () => {
 		};
 		const next = jest.fn();
 
-		const { user } = render(
+		const { container, user } = render(
 			<GoogleContext.Provider value={{ gsiLoaded: true, gapiLoaded: false }}>
 				<Step1SignIn
 					authInfo={undefined}
@@ -47,6 +53,11 @@ describe('<Step1SignIn />', () => {
 		expect(authInfo.name).toBe(ACCOUNTS_AUTH_INFO.name);
 		expect(authInfo.email).toBe(ACCOUNTS_AUTH_INFO.email);
 		expect(authInfo.picture).toBe(ACCOUNTS_AUTH_INFO.picture);
+
+		await act(async () => {
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
 	});
 	it('shows user info when signed in; delete works', async () => {
 		const authInfo = ACCOUNTS_AUTH_INFO;
@@ -60,7 +71,7 @@ describe('<Step1SignIn />', () => {
 		};
 		const next = jest.fn();
 
-		const { user } = render(
+		const { container, user } = render(
 			<GoogleContext.Provider value={{ gsiLoaded: true, gapiLoaded: false }}>
 				<Step1SignIn
 					authInfo={authInfo}
@@ -100,5 +111,10 @@ describe('<Step1SignIn />', () => {
 
 		expect(setGoogleReady.mock.calls).toHaveLength(1);
 		expect(setGoogleReady.mock.calls[0]).toEqual([Promise.resolve(false)]);
+
+		await act(async () => {
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
 	});
 });
