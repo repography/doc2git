@@ -6,12 +6,12 @@ interface Dirent {
 	isDirectory(): boolean;
 }
 
-async function* getFiles(fs: IFs, dir: string): any {
+export async function* getFiles(fs: IFs, dir: string): any {
 	const entries = (await fs.promises.readdir(dir, {
 		withFileTypes: true,
 	})) as Array<Dirent>;
 	for (const entry of entries) {
-		const path = `${dir}/${entry.name}`;
+		const path = dir === '/' ? `/${entry.name}` : `${dir}/${entry.name}`;
 		if (entry.isDirectory()) {
 			yield* getFiles(fs, path);
 		} else {
