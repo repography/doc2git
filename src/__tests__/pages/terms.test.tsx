@@ -1,9 +1,6 @@
 import { axe } from 'jest-axe';
 
-import {
-	act,
-	render,
-} from '@/__tests__/__helpers__/testing-library-react';
+import { act, render } from '@/__tests__/__helpers__/testing-library-react';
 
 import Terms from '../../pages/terms';
 
