@@ -34,6 +34,9 @@ nvm install        # Install/use the correct node version
 npm install        # Install dependencies
 make dev           # Run the dev server
 ```
+## [![Repography logo](https://images.repography.com/logo.svg)](https://repography.com) / Recent activity [![Time period](https://images.repography.com/19895906/repography/doc2git/recent-activity/WfK3_oS4RD5UYYYFVuzSTrbsmO-SJqDods_EEfXBjRE/u9ieHpW49qXDc-06RBpRMQwG5k4yytCSG2OqR4VH8xo_badge.svg)](https://repography.com)
+[![Timeline graph](https://images.repography.com/19895906/repography/doc2git/recent-activity/WfK3_oS4RD5UYYYFVuzSTrbsmO-SJqDods_EEfXBjRE/u9ieHpW49qXDc-06RBpRMQwG5k4yytCSG2OqR4VH8xo_timeline.svg)](https://github.com/repography/doc2git/commits)
+[![Issue status graph](https://images.repography.com/19895906/repography/doc2git/recent-activity/WfK3_oS4RD5UYYYFVuzSTrbsmO-SJqDods_EEfXBjRE/u9ieHpW49qXDc-06RBpRMQwG5k4yytCSG2OqR4VH8xo_issues.svg)](https://github.com/repography/doc2git/issues)
 
 ## [![Repography logo](https://images.repography.com/logo.svg)](https://repography.com) / Structure
-[![Structure](https://images.repography.com/19895906/repography/doc2git/structure/Xdp0kVq_dZMDYRYZOp6oCphfIk5Gj3O5ZKq5vLDnLgY/DiY3rh20x1BSz1Byso7ReFaaMLYfrogsVrgmm2R2wQM_table.svg)](https://github.com/repography/doc2git)
+[![Structure](https://images.repography.com/19895906/repography/doc2git/structure/WfK3_oS4RD5UYYYFVuzSTrbsmO-SJqDods_EEfXBjRE/25SCXE_S_nKk0g1KyIkozybw-lMuQc_DYgtMNfDveYc_table.svg)](https://github.com/repography/doc2git)
