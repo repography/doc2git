@@ -47,7 +47,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest-axe": "^3.5.5",
     "@typescript-eslint/eslint-plugin": "5.54.0",
-    "eslint": "8.35.0",
+    "eslint": "8.39.0",
     "eslint-config-next": "13.2.1",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-jest": "27.1.1",
